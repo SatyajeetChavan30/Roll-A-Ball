@@ -1,0 +1,14 @@
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+.obj/
+.vs/
+*.csproj
+*.sln
+*.user
+.vscode/
+Logs/
+MemoryCaptures/
+.DS_Store
+
