@@ -32,4 +32,10 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(movement * speed);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("YelloThingy"))
+            other.gameObject.SetActive(false);
+    }
 }
