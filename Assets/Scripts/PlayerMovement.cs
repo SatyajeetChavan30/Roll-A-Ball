@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +11,17 @@ public class PlayerController : MonoBehaviour
 
     private float movementX;
     private float movementY;
-
+    private int count;
     public float speed = 5;
+    public TextMeshProUGUI countText;
+    public GameObject winTextObject;
 
     void Start()
     {
+        winTextObject.SetActive(false);
+        count = 0;
         rb = GetComponent<Rigidbody>();
+        SetCountText();
     }
 
     void OnMove(InputValue movementValue)
@@ -24,6 +30,13 @@ public class PlayerController : MonoBehaviour
 
         movementX = movementVector.x;
         movementY = movementVector.y;
+    }
+
+    void SetCountText()
+    {
+        countText.text = "Score: " + count.ToString();
+        if (count > 4)
+            winTextObject.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -35,7 +48,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("YelloThingy"))
+
+        if (other.gameObject.CompareTag("YelloThingy"))
+        {
+            count = count + 1;
             other.gameObject.SetActive(false);
+            SetCountText();
+        }
     }
 }
